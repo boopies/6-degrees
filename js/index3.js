@@ -1,0 +1,103 @@
+function getSimilarItems3(newSearch){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}&limit=6`)
+    .then(response => response.json())
+    .then(responseJson => displayResults3(responseJson))
+    .catch(error => alert('We are having some issues.'));
+}
+
+function displayResults3(responseJson) {
+    currentObj = responseJson;
+    if (responseJson.status == 'error'){
+        $('.results-three').append(`
+        <h2 class="problem">Sorry</h2>
+        <div class="search-results">
+        <p>${responseJson.message}. Please try again.</p> </div>`)
+    } else {
+    $('.results-three').append(`
+    <h2>3</h2>
+    <div class="search-results3"> </div>`)
+    for (let i = 0; i < responseJson.Similar.Results.length; i++){
+        $('.search-results3').append(`<p>${i+1}</p>
+    <p>${responseJson.Similar.Results[i].Name}</p>
+    <p>${responseJson.Similar.Results[i].Type}</p>
+    <div class="after3">
+        <button type="submit" class="after" value="${responseJson.Similar.Results[i].Name}" id="thirdresponse${[i+1]}"> 
+        Search with this</button>
+        <a class="button hidden-after" href="#thirdpopups${[i+1]}">Read a bit</a>
+    </div>
+        <div id="thirdpopups${[i+1]}" class="overlay">
+	<div class="popup-result ${[i+1]}">
+		<h2>${responseJson.Similar.Results[i].Name}</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+         ${responseJson.Similar.Results[i].wTeaser}
+         <a href='${responseJson.Similar.Results[i].wUrl}' target="blank">Read More Here</a>
+		</div>
+	</div>
+</div>`)};
+    //display the results section
+    $('.results-three').removeClass('hidden');
+    $(function(){
+        console.log('App loaded! Waiting for submit!');
+        watchForm4();
+    });
+  }
+}
+
+
+function watchForm3() {
+    document.body.addEventListener( 'click', function ( event ) {
+        if(event.srcElement.id == 'seondresponse1' ) {
+            let saveThis = currentObj.Similar.Results[0];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse1').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+        if(event.srcElement.id == 'seondresponse2' ) {
+            let saveThis = currentObj.Similar.Results[1];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse2').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+        if(event.srcElement.id == 'seondresponse3' ) {
+            let saveThis = currentObj.Similar.Results[2];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse3').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+        if(event.srcElement.id == 'seondresponse4' ) {
+            let saveThis = currentObj.Similar.Results[3];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse4').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+        if(event.srcElement.id == 'seondresponse5' ) {
+            let saveThis = currentObj.Similar.Results[4];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse5').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+        if(event.srcElement.id == 'seondresponse6' ) {
+            let saveThis = currentObj.Similar.Results[5];
+            saveChoice(saveThis);
+            currentObj = {};
+            const newSearch = $('#seondresponse6').val();
+            getSimilarItems3(newSearch);
+            hideSearch2();
+        };
+      } );
+    }
+
+function hideSearch2(){
+    $('.after2').addClass('after-hidden')
+}
