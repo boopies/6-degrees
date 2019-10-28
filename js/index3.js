@@ -6,7 +6,6 @@ function getSimilarItems3(newSearch){
 }
 
 function displayResults3(responseJson) {
-    currentObj = responseJson;
     if (responseJson.status == 'error'){
         $('.results-three').append(`
         <h2 class="problem">Sorry</h2>
@@ -38,22 +37,21 @@ function displayResults3(responseJson) {
     //display the results section
     $('.results-three').removeClass('hidden');
     $(function(){
-        watchForm4();
+        watchForm4(responseJson);
     });
   }
 }
 
 
-function watchForm3() {
+function watchForm3(responseJson) {
     //creates an array from the results buttons
     const arrayTwo = $('.results-two .after2 button').map(function () { return this.id; }).get();
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arrayTwo.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
         if(event.srcElement.id == `${arrayTwo[i]}`) {
-            let saveThis = currentObj.Similar.Results[i];
+            let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
-            currentObj = {};
             const newSearch = $(`#${arrayTwo[i]}`).val();
             getSimilarItems3(newSearch);
             hideSearch2();

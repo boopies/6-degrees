@@ -1,21 +1,26 @@
 let finalPath = [];
+let firstSearch = [];
 
 function saveChoice(saveThis){
     finalPath.push(saveThis);
     console.log(finalPath);
 }
 
+function saveInput(responseJson){
 
-function watchForm7() {
+    firstSearch = responseJson.Similar.Info[0];
+    console.log(firstSearch);
+}
+
+function watchForm7(responseJson) {
     //creates an array from the results buttons
     const arraySix = $('.results-six .after6 button').map(function () { return this.id; }).get();
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arraySix.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
         if(event.srcElement.id == `${arraySix[i]}`) {
-            let saveThis = currentObj.Similar.Results[i];
+            let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
-            for (var prop in currentObj) { if (currentObj.hasOwnProperty(prop)) { delete currentObj[prop]};}
             displayFinal6();
             hideAllResults();
         } 
@@ -23,10 +28,19 @@ function watchForm7() {
 }
 }
 
-
     function displayFinal6(){
         $('.final-results-all').append(`
-        <h2>Your 6 Degrees</h2>
+        <h2>Your 6 Degrees from ${firstSearch.Name}  <a class="button hidden-after" href="#endingpopupsinput">Read a bit</a>
+        </div>is            <div id="endingpopupsinput" class="overlay">
+        <div class="popup-result input">
+            <h2>${firstSearch.Name}</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+             ${firstSearch.wTeaser}
+             <a href='${firstSearch.wUrl}' target="blank">Read More Here</a>
+            </div>
+        </div>
+    </div> </h2>
         <div class="Final-Results"> </div>`)
         for (let i = 0; i < finalPath.length; i++){
             $('.final-results-all').append(`<p>${i+1}</p>
@@ -63,15 +77,6 @@ function watchForm7() {
   function watchReset() {
     $('#reset-button').click(event => {
       event.preventDefault();
-      finalPath.length = 0;
-      $('.result-end').addClass('hidden');
-      $('.results-one').empty();
-      $('.results-two').empty();
-      $('.results-three').empty();
-      $('.results-four').empty();
-      $('.results-five').empty();
-      $('.results-six').empty();
-      $('.final-results-all').empty();
-      document.getElementById("search-form").reset();
+      document.location.reload(true);
     });
 }

@@ -1,4 +1,3 @@
-let currentObj = {};
 //random all breeds
 function getSimilarItems(inputFirstItem){
     fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${inputFirstItem}&limit=6`)
@@ -8,7 +7,7 @@ function getSimilarItems(inputFirstItem){
 }
 
 function displayResults(responseJson) {
-    currentObj = responseJson;
+    console.log(responseJson);
     if (responseJson.status == 'error'){
         $('.results-one').append(`
         <h2 class="problem">Bow No!</h2>
@@ -42,7 +41,8 @@ function displayResults(responseJson) {
     $('.results-one').removeClass('hidden');
     $(function(){
         console.log('App loaded! Waiting for submit!');
-        watchForm2();
+        saveInput(responseJson);
+        watchForm2(responseJson);
     });
   }
 }
@@ -51,6 +51,7 @@ function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
       const inputFirstItem = $('#js-search-term').val();
+      firstSearch = $('#js-search-term').val();
       getSimilarItems(inputFirstItem);
     });
 }
