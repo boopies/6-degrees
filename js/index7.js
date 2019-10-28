@@ -9,7 +9,6 @@ function saveChoice(saveThis){
 function watchForm7() {
     //creates an array from the results buttons
     const arraySix = $('.results-six .after6 button').map(function () { return this.id; }).get();
-    console.log(arraySix);
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arraySix.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
@@ -17,7 +16,6 @@ function watchForm7() {
             let saveThis = currentObj.Similar.Results[i];
             saveChoice(saveThis);
             for (var prop in currentObj) { if (currentObj.hasOwnProperty(prop)) { delete currentObj[prop]};}
-            console.log(currentObj);
             displayFinal6();
             hideAllResults();
         } 

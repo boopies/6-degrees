@@ -38,7 +38,6 @@ function displayResults6(responseJson) {
     //display the results section
     $('.results-six').removeClass('hidden');
     $(function(){
-        console.log('App loaded! Waiting for submit!');
         watchForm7();
     });
   }
@@ -48,7 +47,6 @@ function displayResults6(responseJson) {
 function watchForm6() {    
     //creates an array from the results buttons
     const arrayFive = $('.results-five .after5 button').map(function () { return this.id; }).get();
-    console.log(arrayFive);
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arrayFive.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
