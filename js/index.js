@@ -23,7 +23,7 @@ function displayResults(responseJson) {
     <p>${responseJson.Similar.Results[i].Name}</p>
     <p>${responseJson.Similar.Results[i].Type}</p>
     <div class="after1">
-        <button type="submit" class="after" value="${responseJson.Similar.Results[i].Name}" id="firstresponse${[i+1]}"> 
+        <button type="submit" class="after" value="${responseJson.Similar.Results[i].Name}" id="firstresponse${[i]}"> 
         Search with this</button>
         <a class="button hidden-after" href="#firstpopups${[i+1]}">Read a bit</a>
     </div>

@@ -7,51 +7,24 @@ function saveChoice(saveThis){
 
 
 function watchForm7() {
+    //creates an array from the results buttons
+    const arraySix = $('.results-six .after6 button').map(function () { return this.id; }).get();
+    console.log(arraySix);
+    //loops to the buttons to add an event listener to start a new search
+     for (let i=0; i < arraySix.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
-        if(event.srcElement.id == 'sixthresponse1' ) {
-            let saveThis = currentObj.Similar.Results[0];
+        if(event.srcElement.id == `${arraySix[i]}`) {
+            let saveThis = currentObj.Similar.Results[i];
             saveChoice(saveThis);
-            currentObj = {};
+            for (var prop in currentObj) { if (currentObj.hasOwnProperty(prop)) { delete currentObj[prop]};}
+            console.log(currentObj);
             displayFinal6();
             hideAllResults();
-        };
-        if(event.srcElement.id == 'sixthresponse2' ) {
-            let saveThis = currentObj.Similar.Results[1];
-            saveChoice(saveThis);
-            currentObj = {};
-            displayFinal6();
-            hideAllResults();
-        };
-        if(event.srcElement.id == 'sixthresponse3' ) {
-            let saveThis = currentObj.Similar.Results[2];
-            saveChoice(saveThis);
-            currentObj = {};
-            displayFinal6();
-            hideAllResults();
-        };
-        if(event.srcElement.id == 'sixthresponse4' ) {
-            let saveThis = currentObj.Similar.Results[3];
-            saveChoice(saveThis);
-            currentObj = {};
-            displayFinal6();
-            hideAllResults();
-        };
-        if(event.srcElement.id == 'sixthresponse5' ) {
-            let saveThis = currentObj.Similar.Results[4];
-            saveChoice(saveThis);
-            currentObj = {};
-            displayFinal6();
-            hideAllResults();
-        };
-        if(event.srcElement.id == 'sixthresponse6' ) {
-            let saveThis = currentObj.Similar.Results[5];
-            saveChoice(saveThis);
-            currentObj = {};
-            displayFinal6();
-            hideAllResults();
-        };
-      } );
-    }
+        } 
+    });
+}
+}
+
 
     function displayFinal6(){
         $('.final-results-all').append(`
@@ -88,7 +61,7 @@ function watchForm7() {
     $('.results-six').addClass('hidden');
   }
 
-
+//resets everything
   function watchReset() {
     $('#reset-button').click(event => {
       event.preventDefault();
@@ -101,5 +74,6 @@ function watchForm7() {
       $('.results-five').empty();
       $('.results-six').empty();
       $('.final-results-all').empty();
+      document.getElementById("search-form").reset();
     });
 }

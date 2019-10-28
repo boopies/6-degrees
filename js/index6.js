@@ -21,7 +21,7 @@ function displayResults6(responseJson) {
     <p>${responseJson.Similar.Results[i].Name}</p>
     <p>${responseJson.Similar.Results[i].Type}</p>
     <div class="after6">
-        <button type="submit" class="after" value="${responseJson.Similar.Results[i].Name}" id="sixthresponse${[i+1]}"> 
+        <button type="submit" class="after" value="${responseJson.Similar.Results[i].Name}" id="sixthresponse${[i]}"> 
         End</button>
         <a class="button hidden-after" href="#sixthpopups${[i+1]}">Read a bit</a>
     </div>
@@ -45,58 +45,25 @@ function displayResults6(responseJson) {
 }
 
 
-function watchForm6() {
+function watchForm6() {    
+    //creates an array from the results buttons
+    const arrayFive = $('.results-five .after5 button').map(function () { return this.id; }).get();
+    console.log(arrayFive);
+    //loops to the buttons to add an event listener to start a new search
+     for (let i=0; i < arrayFive.length; i++){
     document.body.addEventListener( 'click', function ( event ) {
-        if(event.srcElement.id == 'fifthresponse1' ) {
-            let saveThis = currentObj.Similar.Results[0];
+        if(event.srcElement.id == `${arrayFive[i]}`) {
+            let saveThis = currentObj.Similar.Results[i];
             saveChoice(saveThis);
             currentObj = {};
-            const newSearch = $('#fifthresponse1').val();
+            const newSearch = $(`#${arrayFive[i]}`).val();
             getSimilarItems6(newSearch);
             hideSearch5();
-        };
-        if(event.srcElement.id == 'fifthresponse2' ) {
-            let saveThis = currentObj.Similar.Results[1];
-            saveChoice(saveThis);
-            currentObj = {};
-            const newSearch = $('#fifthresponse2').val();
-            getSimilarItems6(newSearch);
-            hideSearch5();
-        };
-        if(event.srcElement.id == 'fifthresponse3' ) {
-            let saveThis = currentObj.Similar.Results[2];
-            saveChoice(saveThis);
-            currentObj = {};
-            const newSearch = $('#fifthresponse3').val();
-            getSimilarItems6(newSearch);
-            hideSearch5();
-        };
-        if(event.srcElement.id == 'fifthresponse4' ) {
-            let saveThis = currentObj.Similar.Results[3];
-            saveChoice(saveThis);
-            currentObj = {};
-            const newSearch = $('#fifthresponse4').val();
-            getSimilarItems6(newSearch);
-            hideSearch5();
-        };
-        if(event.srcElement.id == 'fifthresponse5' ) {
-            let saveThis = currentObj.Similar.Results[4];
-            saveChoice(saveThis);
-            currentObj = {};
-            const newSearch = $('#fifthresponse5').val();
-            getSimilarItems6(newSearch);
-            hideSearch5();
-        };
-        if(event.srcElement.id == 'fifthresponse6' ) {
-            let saveThis = currentObj.Similar.Results[5];
-            saveChoice(saveThis);
-            currentObj = {};
-            const newSearch = $('#fifthresponse6').val();
-            getSimilarItems6(newSearch);
-            hideSearch5();
-        };
-      } );
-    }
+      } 
+    });
+};
+}
+
 
 function hideSearch5(){
     $('.after5').addClass('after-hidden')
