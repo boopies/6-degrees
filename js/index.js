@@ -1,12 +1,15 @@
 let LimitResults;
+let returnResults = 6;
 
-function getSimilarItems(inputFirstItem, limitResults, limitSearch){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
+//Fetch JSON from API
+function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResults){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=${returnResults}`)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('We are having some issues.'));
 }
 
+//Display search results on the DOM. Saves the original Input to be used later.
 function displayResults(responseJson) {
     console.log(responseJson);
     if (responseJson.Similar.Results.length === 0){
@@ -53,19 +56,23 @@ function displayResults(responseJson) {
     });
 }
 
+//Form to input selection
 function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
       const inputFirstItem = $('#js-search-term').val();
       const limitSearch = $('#search-specific option:selected').val();
       const alimitResults = $('#specific-result option:selected').val();
+      const maxResults = $('#js-max-results').val();
+      returnResults = maxResults;
       limitResults = alimitResults;
       $('#all-buttons').addClass('hidden')
       firstSearch = $('#js-search-term').val();
-      getSimilarItems(inputFirstItem, limitResults, limitSearch);
+      getSimilarItems(inputFirstItem, limitResults, limitSearch, maxResults);
     });
 }
 
+//reveals the extra search items
 function revealLimitSearch(){
     $('.limit-search').click(event =>{
         event.preventDefault();
@@ -78,23 +85,8 @@ function revealLimitSearch(){
           });
 }
 
-
-function revealLimitResults(){
-    $('.limit-results').click(event =>{
-        event.preventDefault();
-            var x = document.getElementById('result-sepecific');
-            if (x.style.display === "none") {
-              x.style.display = "block";
-            } else {
-              x.style.display = "none";
-            }
-          });
-}
-
-
 $(function(){
     console.log('App loaded! Waiting for submit!');
     watchForm();
     revealLimitSearch();
-    revealLimitResults();
 });

@@ -1,10 +1,12 @@
-function getSimilarItems2(newSearch, limitResults){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=6`)
+//Fetch JSON from API
+function getSimilarItems2(newSearch, limitResults, returnResults){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
     .then(response => response.json())
     .then(responseJson => displayResults2(responseJson))
     .catch(error => alert('We are having some issues.'));
 }
 
+//Hides the previous search results and displays new search Results to DOM
 function displayResults2(responseJson) {
     if (responseJson.Similar.Results.length === 0){
         $('.results-two').append(`
@@ -38,6 +40,7 @@ function displayResults2(responseJson) {
 	</div>
 </div>`)};
     //display the results section
+    $('.results-one').addClass('hidden');
     $('.results-two').removeClass('hidden');
     $(function(){
         watchForm3(responseJson);
@@ -45,7 +48,7 @@ function displayResults2(responseJson) {
   }
 }
 
-
+//Selects the new Search Item, Saves the New Search Item to be used later
 function watchForm2(responseJson) {
     //creates an array from the results buttons
     const arrayOne = $('.results-one .after1 button').map(function () { return this.id; }).get();
@@ -56,7 +59,7 @@ function watchForm2(responseJson) {
             let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
             const newSearch = $(`#${arrayOne[i]}`).val();
-            getSimilarItems2(newSearch, limitResults);
+            getSimilarItems2(newSearch, limitResults, returnResults);
             hideSearch1();
       } 
       

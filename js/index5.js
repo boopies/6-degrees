@@ -1,10 +1,12 @@
-function getSimilarItems5(newSearch, limitResults){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=6`)
+//Fetch JSON from API
+function getSimilarItems5(newSearch, limitResults, returnResults){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
     .then(response => response.json())
     .then(responseJson => displayResults5(responseJson))
     .catch(error => alert('We are having some issues.'));
 }
 
+//Hides the previous search results and displays new search Results to DOM
 function displayResults5(responseJson) {
     if (responseJson.Similar.Results.length === 0){
         $('.results-five').append(`
@@ -38,6 +40,7 @@ function displayResults5(responseJson) {
 	</div>
 </div>`)};
     //display the results section
+    $('.results-four').addClass('hidden');
     $('.results-five').removeClass('hidden');
     $(function(){
         watchForm6(responseJson);
@@ -45,7 +48,7 @@ function displayResults5(responseJson) {
   }
 }
 
-
+//Selects the new Search Item, Saves the New Search Item to be used later
 function watchForm5(responseJson) {
     //creates an array from the results buttons
     const arrayFour = $('.results-four .after4 button').map(function () { return this.id; }).get();
@@ -56,13 +59,14 @@ function watchForm5(responseJson) {
             let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
             const newSearch = $(`#${arrayFour[i]}`).val();
-            getSimilarItems5(newSearch, limitResults);
+            getSimilarItems5(newSearch, limitResults, returnResults);
             hideSearch4();
       } 
     });
 };
 }
 
+//Hides the search and read more buttons
 function hideSearch4(){
     $('.after4').addClass('after-hidden')
 }

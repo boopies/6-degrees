@@ -13,8 +13,8 @@
 <body>
     <nav class="navigation hidden">
         <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="index.html">Reset</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="main.html">Reset</a></li>
         </ul>
     </nav>
     <header><h1>6 Degrees</h1></header>
@@ -23,13 +23,16 @@
             <div class="about"><p>Insert the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love.
                 </p></div>
             <form id="search-form">
-                <label for="search-term">Input Search</label>
+                <label for="search-term">Input Search:</label>
                 <input class="search" input="text" id="js-search-term" required>
                 <div id="all-buttons">
                     <button type="submit" class="limit-search">More Search Options</button>
-                        <div id='search-sepecific'> <label>More than one type with the same name? Which Category does it belong to?</label>
+                    <div id='search-sepecific'>
+                        <label for="max-results">Results to return(min=3, Max=50) You cannot change this unless you reset the search.</label>
+                        <input type="number" name="max-results" id="js-max-results" value="6" min="3" max="20">
+                        <div > <label>More than one type with the same name? Which Category does it belong to?</label>
                             <select id='search-specific'>
-                                <option value="">Any type</option>
+                                <option value="">any</option>
                                 <option value="movie:">Movie</option>
                                 <option value="book:">Book</option>
                                 <option value="band:">Musician</option>
@@ -39,8 +42,8 @@
                                 <option value="podcast:">Podcast</option>
                             </select>
                         </div>
-                    <button type="submit" class="limit-results">Result Options</button>
-                        <div id='result-sepecific'> <lablel>Don't like mixed results? Get a specific type of results only.</lablel>
+                        <div id='result-specific'> <lablel>Don't like mixed results? Get a specific type of results only. 
+                            For best results choose a category your input belongs to.</lablel>
                             <select id='specific-result'>
                                 <option value="">All Categories</option>
                                 <option value="&type=movies">Movies</option>
@@ -51,6 +54,7 @@
                                 <option value="&type=games">Games</option>
                                 <option value="&type=podcasts">Podcasts</option>
                         </select></div>
+                    </div>
                 <button type="submit" class="similar-button-hide">Get Similar Items</button>
                 </div>
             </form>

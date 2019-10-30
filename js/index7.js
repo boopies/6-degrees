@@ -1,17 +1,22 @@
+//array of saved search results
 let finalPath = [];
+
+//array of the first search result
 let firstSearch = [];
 
+//push familiar search info to finalPath array
 function saveChoice(saveThis){
     finalPath.push(saveThis);
     console.log(finalPath);
 }
 
+//Sets the firstSearch array as first search Info
 function saveInput(responseJson){
-
     firstSearch = responseJson.Similar.Info[0];
     console.log(firstSearch);
 }
 
+//Selects the final search result, pushes the final results to the finalPath array, Hides the 6th results
 function watchForm7(responseJson) {
     //creates an array from the results buttons
     const arraySix = $('.results-six .after6 button').map(function () { return this.id; }).get();
@@ -22,15 +27,16 @@ function watchForm7(responseJson) {
             let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
             displayFinal6();
-            hideAllResults();
+            $('.results-six').addClass('hidden');;
         } 
     });
 }
 }
 
+//Display the 6 choices you have selected. gives you more information about it. 
     function displayFinal6(){
         $('.final-results-all').append(`
-        <h2>Your 6 Degrees from ${firstSearch.Name} <a class="button hidden-after" href="#endingpopupsinput">Read a bit</a>
+        <h2>Your 6 Degrees from <a class="button hidden-after" href="#endingpopupsinput">${firstSearch.Name}</a>
         </div>is <div id="endingpopupsinput" class="overlay">
         <div class="popup-result input">
             <h2>${firstSearch.Name}</h2>
@@ -65,16 +71,7 @@ function watchForm7(responseJson) {
     watchStart();
   }
 
-  function hideAllResults(){
-    $('.results-one').addClass('hidden');
-    $('.results-two').addClass('hidden');
-    $('.results-three').addClass('hidden');
-    $('.results-four').addClass('hidden');
-    $('.results-five').addClass('hidden');
-    $('.results-six').addClass('hidden');
-  }
-
-//resets everything from the search
+//resets everything from the search and start again from the search page
   function watchReset() {
     $('#reset-button').click(event => {
       event.preventDefault();
@@ -82,6 +79,7 @@ function watchForm7(responseJson) {
     });
 }
 
+//returns users to the landing page
 function watchStart() {
     $('#gotoStart').click(event => {
       event.preventDefault();

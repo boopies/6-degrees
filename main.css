@@ -48,10 +48,6 @@ form{
     justify-content: center;
 }
 
-#result-sepecific{
-  display: none;
-}
-
 #search-sepecific{
   display: none;
 }
@@ -62,7 +58,8 @@ form{
 
 .button {
     font-size: 1em;
-    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: 2px solid black;
     text-decoration: none;
     cursor: pointer;
