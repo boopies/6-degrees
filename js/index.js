@@ -1,7 +1,7 @@
 let LimitResults;
 
 function getSimilarItems(inputFirstItem, limitResults, limitSearch){
-    fetch (`https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('We are having some issues.'));
