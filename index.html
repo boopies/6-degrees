@@ -8,48 +8,20 @@
     <meta name="description" content="A website to find new things that you might like">
     <meta name="keywords" content="search, similar, familiar, 6-degrees">
     <meta name="author" content="Mulia Teguh Nguyen">
-    <link type="text/css" rel="stylesheet" href="main.css">
+    <link type="text/css" rel="stylesheet" href="index.css">
 </head>
 <body>
-    <nav></nav>
-    <header><h1>6 Degrees</h1></header>
+    <header><h1>Welcome to 6 degrees!</h1></header>
     <main>
-        <section class="submit-form">
-            <form id="search-form">
-                <label for="search-term">Input something you love</label>
-                <input class="search" input="text" id="js-search-term" required>
-                <button type="submit" class="similar-button-hide">Get Similar Items</button>
-            </form>
-        </section>
-        <section class="results-one hidden">
-        </section>
-        <section class="results-two hidden">
-        </section>
-        <section class="results-three hidden">
-        </section>
-        <section class="results-four hidden">
-        </section>
-        <section class="results-five hidden">
-        </section>
-        <section class="results-six hidden">
-        </section>
-        <section class="result-end hidden">
-            <div class="final-results-all"></div>
-            <button class="submit" id="reset-button">Search Again</button>
+        <section class="introduction">
+            <div class="intro">Have you ever wondered what artists, books, music, podcasts, movies, or games are simlar to the ones you love?
+            6 degrees is can help you find something that is similar to what you like. And if you like what you read, you can extend that search further.
+            Who knows? Maybe you will discover something that you have never heard of before that takes your fancy.</div>
+            <button type="submit" id="start-here">Start the search here</button>
         </section>
     </main>
-
-
-    <footer>
-        This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a>.
-    </footer>
+    <footer>This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a>.</footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
-    <script src="js/index2.js"></script>
-    <script src="js/index3.js"></script>
-    <script src="js/index4.js"></script>
-    <script src="js/index5.js"></script>
-    <script src="js/index6.js"></script>
-    <script src="js/index7.js"></script>
+    <script src="js/start.js"></script>
 </body>
 </html>

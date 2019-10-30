@@ -1,6 +1,7 @@
-//random all breeds
-function getSimilarItems(inputFirstItem){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${inputFirstItem}&limit=6`)
+let limitResults;
+
+function getSimilarItems(inputFirstItem, limitResults, limitSearch){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('We are having some issues.'));
@@ -8,17 +9,20 @@ function getSimilarItems(inputFirstItem){
 
 function displayResults(responseJson) {
     console.log(responseJson);
-    if (responseJson.status == 'error'){
+    if (responseJson.Similar.Results.length === 0){
         $('.results-one').append(`
-        <h2 class="problem">Bow No!</h2>
+        <h2 class="problem">Oh No!</h2>
         <div class="search-results">
-        <p>${responseJson.message}. Please try again.</p> </div>`)
+        <p>There no results for this. Please check your spelling and try again.</p> 
+        <button class="submit" id="reset-button">Search Again</button></div>`);
+        $('.submit-form').addClass('hidden')
+        watchReset();
     } else {
     $('.results-one').append(`
-    <h2>1</h2>
-    <div class="search-results1"> </div>`)
+    <h2>First Degree of Similarity</h2>
+    <div class="search-results1"> </div>`);
     for (let i = 0; i < responseJson.Similar.Results.length; i++){
-        $('.search-results1').append(`<p>${i+1}</p>
+        $('.search-results1').append(`<div class="results-box${i+1}"><p>${i+1}</p>
     <p>${responseJson.Similar.Results[i].Name}</p>
     <p>${responseJson.Similar.Results[i].Type}</p>
     <div class="after1">
@@ -26,37 +30,69 @@ function displayResults(responseJson) {
         Search with this</button>
         <a class="button hidden-after" href="#firstpopups${[i+1]}">Read a bit</a>
     </div>
-    <div id="firstpopups${[i+1]}" class="overlay">
-	<div class="popup-result ${[i+1]}">
+    <div id="firstpopups${i+1}" class="overlay">
+	<div class="popup-result ${i+1}">
 		<h2>${responseJson.Similar.Results[i].Name}</h2>
 		<a class="close" href="#">&times;</a>
 		<div class="content">
          ${responseJson.Similar.Results[i].wTeaser}
          <a href='${responseJson.Similar.Results[i].wUrl}' target="blank">Read More Here</a>
-		</div>
-	</div>
-</div>`)};
-    
-    //display the results section
+		            </div>
+	            </div>
+            </div>
+        </div>`);
+
+        };
+    };
     $('.results-one').removeClass('hidden');
     $(function(){
         console.log('App loaded! Waiting for submit!');
         saveInput(responseJson);
         watchForm2(responseJson);
     });
-  }
 }
 
 function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
       const inputFirstItem = $('#js-search-term').val();
+      const limitSearch = $('#search-specific option:selected').val();
+      limitResults = $('#specific-result option:selected').val();
+      $('#all-buttons').addClass('hidden')
       firstSearch = $('#js-search-term').val();
-      getSimilarItems(inputFirstItem);
+      getSimilarItems(inputFirstItem, limitResults, limitSearch);
     });
 }
+
+function revealLimitSearch(){
+    $('.limit-search').click(event =>{
+        event.preventDefault();
+            var x = document.getElementById('search-sepecific');
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+          });
+}
+
+
+function revealLimitResults(){
+    $('.limit-results').click(event =>{
+        event.preventDefault();
+            var x = document.getElementById('result-sepecific');
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+          });
+}
+
 
 $(function(){
     console.log('App loaded! Waiting for submit!');
     watchForm();
+    revealLimitSearch();
+    revealLimitResults();
 });

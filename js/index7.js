@@ -30,8 +30,8 @@ function watchForm7(responseJson) {
 
     function displayFinal6(){
         $('.final-results-all').append(`
-        <h2>Your 6 Degrees from ${firstSearch.Name}  <a class="button hidden-after" href="#endingpopupsinput">Read a bit</a>
-        </div>is            <div id="endingpopupsinput" class="overlay">
+        <h2>Your 6 Degrees from ${firstSearch.Name} <a class="button hidden-after" href="#endingpopupsinput">Read a bit</a>
+        </div>is <div id="endingpopupsinput" class="overlay">
         <div class="popup-result input">
             <h2>${firstSearch.Name}</h2>
             <a class="close" href="#">&times;</a>
@@ -62,6 +62,7 @@ function watchForm7(responseJson) {
     };
     $('.result-end').removeClass('hidden');
     watchReset();
+    watchStart();
   }
 
   function hideAllResults(){
@@ -73,10 +74,17 @@ function watchForm7(responseJson) {
     $('.results-six').addClass('hidden');
   }
 
-//resets everything
+//resets everything from the search
   function watchReset() {
     $('#reset-button').click(event => {
       event.preventDefault();
       document.location.reload(true);
+    });
+}
+
+function watchStart() {
+    $('#gotoStart').click(event => {
+      event.preventDefault();
+      window.location='index.html';
     });
 }

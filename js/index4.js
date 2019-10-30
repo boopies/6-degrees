@@ -1,19 +1,22 @@
-function getSimilarItems4(newSearch){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}&limit=6`)
+function getSimilarItems4(newSearch, limitResults){
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=6`)
     .then(response => response.json())
     .then(responseJson => displayResults4(responseJson))
     .catch(error => alert('We are having some issues.'));
 }
 
 function displayResults4(responseJson) {
-    if (responseJson.status == 'error'){
+    if (responseJson.Similar.Results.length === 0){
         $('.results-four').append(`
-        <h2 class="problem">Bow No!</h2>
+        <h2 class="problem">Oh No!</h2>
         <div class="search-results">
-        <p>${responseJson.message}. Please try again.</p> </div>`)
+        <p>There no results for this. Please check your spelling and try again.</p> 
+        <button class="submit" id="reset-button">Search Again</button></div>`);
+        $('.submit-form').addClass('hidden')
+        watchReset();
     } else {
     $('.results-four').append(`
-    <h2>4</h2>
+    <h2>Fourh Degree of Similarity</h2>
     <div class="search-results4"> </div>`)
     for (let i = 0; i < responseJson.Similar.Results.length; i++){
         $('.search-results4').append(`<p>${i+1}</p>
@@ -53,7 +56,7 @@ function watchForm4(responseJson) {
             let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
             const newSearch = $(`#${arrayThree[i]}`).val();
-            getSimilarItems4(newSearch);
+            getSimilarItems4(newSearch, limitResults);
             hideSearch3();
       } 
     });

@@ -1,0 +1,30 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+header{
+    margin-top: 10%;
+}
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    color: rgb(22, 96, 126);
+}
+
+.intro{
+    font-size: 1.2rem;
+}
+
+button {
+    font-size: 2rem;
+}

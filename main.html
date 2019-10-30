@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6 degrees</title>
+    <meta name="description" content="A website to find new things that you might like">
+    <meta name="keywords" content="search, similar, familiar, 6-degrees">
+    <meta name="author" content="Mulia Teguh Nguyen">
+    <link type="text/css" rel="stylesheet" href="main.css">
+</head>
+<body>
+    <nav></nav>
+    <header><h1>6 Degrees</h1></header>
+    <main>
+        <section class="submit-form">
+            <div class="about"><p>Insert the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love.
+                </p></div>
+            <form id="search-form">
+                <label for="search-term">Input Search</label>
+                <input class="search" input="text" id="js-search-term" required>
+                <div id="all-buttons">
+                    <button type="submit" class="limit-search">More Search Options</button>
+                        <div id='search-sepecific'> <label>More than one type with the same name? Which Category does it belong to?</label>
+                            <select id='search-specific'>
+                                <option value="">Any type</option>
+                                <option value="movie:">Movie</option>
+                                <option value="book:">Book</option>
+                                <option value="band:">Musician</option>
+                                <option value="show:">TV Show</option>
+                                <option value="author:">Author</option>
+                                <option value="game:">Game</option>
+                                <option value="podcast:">Podcast</option>
+                            </select>
+                        </div>
+                    <button type="submit" class="limit-results">Result Options</button>
+                        <div id='result-sepecific'> <lablel>Don't like mixed results? Get a specific type of results only.</lablel>
+                            <select id='specific-result'>
+                                <option value="">All Categories</option>
+                                <option value="&type=movie">Movies</option>
+                                <option value="&type=book">Books</option>
+                                <option value="&type=band">Musicians</option>
+                                <option value="&type=show">TV Shows</option>
+                                <option value="&type=author">Authors</option>
+                                <option value="&type=game">Games</option>
+                                <option value="&type=podcast">Podcasts</option>
+                        </select></div>
+                <button type="submit" class="similar-button-hide">Get Similar Items</button>
+                </div>
+            </form>
+        </section>
+        <section class="results-one hidden">
+        </section>
+        <section class="results-two hidden">
+        </section>
+        <section class="results-three hidden">
+        </section>
+        <section class="results-four hidden">
+        </section>
+        <section class="results-five hidden">
+        </section>
+        <section class="results-six hidden">
+        </section>
+        <section class="result-end hidden">
+            <div class="final-results-all"></div>
+            <button class="submit" id="reset-button">Search Again</button>
+            <button class="submit" id="gotoStart">Start Page</button>
+        </section>
+    </main>
+
+
+    <footer>
+        This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a>.
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+    <script src="js/index2.js"></script>
+    <script src="js/index3.js"></script>
+    <script src="js/index4.js"></script>
+    <script src="js/index5.js"></script>
+    <script src="js/index6.js"></script>
+    <script src="js/index7.js"></script>
+</body>
+</html>

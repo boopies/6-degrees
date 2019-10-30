@@ -9,6 +9,11 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+.problem {
+  color:red;
 }
 
 h1 {
@@ -38,8 +43,17 @@ h2{
 
 form{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#result-sepecific{
+  display: none;
+}
+
+#search-sepecific{
+  display: none;
 }
 
 .hidden{
