@@ -56,7 +56,7 @@ function watchForm5(responseJson) {
             let saveThis = responseJson.Similar.Results[i];
             saveChoice(saveThis);
             const newSearch = $(`#${arrayFour[i]}`).val();
-            getSimilarItems5(nnewSearch, limitResults);
+            getSimilarItems5(newSearch, limitResults);
             hideSearch4();
       } 
     });

@@ -11,7 +11,12 @@
     <link type="text/css" rel="stylesheet" href="main.css">
 </head>
 <body>
-    <nav></nav>
+    <nav class="navigation hidden">
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="index.html">Reset</a></li>
+        </ul>
+    </nav>
     <header><h1>6 Degrees</h1></header>
     <main>
         <section class="submit-form">
@@ -38,13 +43,13 @@
                         <div id='result-sepecific'> <lablel>Don't like mixed results? Get a specific type of results only.</lablel>
                             <select id='specific-result'>
                                 <option value="">All Categories</option>
-                                <option value="&type=movie">Movies</option>
-                                <option value="&type=book">Books</option>
-                                <option value="&type=band">Musicians</option>
-                                <option value="&type=show">TV Shows</option>
-                                <option value="&type=author">Authors</option>
-                                <option value="&type=game">Games</option>
-                                <option value="&type=podcast">Podcasts</option>
+                                <option value="&type=movies">Movies</option>
+                                <option value="&type=books">Books</option>
+                                <option value="&type=music">Music</option>
+                                <option value="&type=shows">TV Shows</option>
+                                <option value="&type=authors">Authors</option>
+                                <option value="&type=games">Games</option>
+                                <option value="&type=podcasts">Podcasts</option>
                         </select></div>
                 <button type="submit" class="similar-button-hide">Get Similar Items</button>
                 </div>

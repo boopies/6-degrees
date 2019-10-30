@@ -1,4 +1,4 @@
-let limitResults;
+let LimitResults;
 
 function getSimilarItems(inputFirstItem, limitResults, limitSearch){
     fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
@@ -45,6 +45,7 @@ function displayResults(responseJson) {
         };
     };
     $('.results-one').removeClass('hidden');
+    $('.navigation').removeClass('hidden');
     $(function(){
         console.log('App loaded! Waiting for submit!');
         saveInput(responseJson);
@@ -57,7 +58,8 @@ function watchForm() {
       event.preventDefault();
       const inputFirstItem = $('#js-search-term').val();
       const limitSearch = $('#search-specific option:selected').val();
-      limitResults = $('#specific-result option:selected').val();
+      const alimitResults = $('#specific-result option:selected').val();
+      limitResults = alimitResults;
       $('#all-buttons').addClass('hidden')
       firstSearch = $('#js-search-term').val();
       getSimilarItems(inputFirstItem, limitResults, limitSearch);

@@ -43,7 +43,7 @@ function watchForm7(responseJson) {
     </div> </h2>
         <div class="Final-Results"> </div>`)
         for (let i = 0; i < finalPath.length; i++){
-            $('.final-results-all').append(`<p>${i+1}</p>
+            $('.final-results-all').append(`<p>Degree ${i+1}</p>
         <p>${finalPath[i].Name}</p>
         <p>${finalPath[i].Type}</p>
         <div class="all-results">
