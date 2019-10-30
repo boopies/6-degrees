@@ -1,7 +1,7 @@
 let LimitResults;
 
 function getSimilarItems(inputFirstItem, limitResults, limitSearch){
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
+    fetch (`https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=6`)
     .then(response => response.json())
     .then(responseJson => displayResults(responseJson))
     .catch(error => alert('We are having some issues.'));
@@ -13,7 +13,7 @@ function displayResults(responseJson) {
         $('.results-one').append(`
         <h2 class="problem">Oh No!</h2>
         <div class="search-results">
-        <p>There no results for this. Please check your spelling and try again.</p> 
+        <p>There no results for this. Please check your spelling and try again or try a new search.</p> 
         <button class="submit" id="reset-button">Search Again</button></div>`);
         $('.submit-form').addClass('hidden')
         watchReset();
