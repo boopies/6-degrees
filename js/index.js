@@ -66,7 +66,8 @@ function watchForm() {
       const maxResults = $('#js-max-results').val();
       returnResults = maxResults;
       limitResults = alimitResults;
-      $('#all-buttons').addClass('hidden')
+      $('#all-buttons').addClass('hidden');
+      $('.similar-button-hide').addClass('hidden');
       firstSearch = $('#js-search-term').val();
       getSimilarItems(inputFirstItem, limitResults, limitSearch, maxResults);
     });
