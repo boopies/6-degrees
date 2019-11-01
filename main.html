@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="main.css">
 </head>
 <body>
-    <nav class="navigation hidden">
+    <nav class="navigation">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="main.html">Reset</a></li>
@@ -20,7 +20,8 @@
     <header><h1>6 Degrees</h1></header>
     <main>
         <section class="submit-form">
-            <div class="about"><p>Insert the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love. We'll find something similar for you.
+            <div class="about"><p>Insert the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love. We'll find something similar for you.<br />
+                please use more search options if you need to refine your search or limit your results. 
                 </p></div>
             <form id="search-form">
                 <label for="search-term">Input Search:</label>
@@ -33,7 +34,7 @@
                     <div id='search-sepecific'>
                         <label for="max-results">Results to return(min=3, Max=20) You cannot change this unless you reset the search.</label>
                         <input type="number" name="max-results" id="js-max-results" value="6" min="3" max="20">
-                        <div > <label>More than one type with the same name? Which Category does it belong to? Leave if input is unique.</label>
+                        <div > <label>More than one type with the same name? Which Category does it belong to? If not don't use this option.</label>
                             <select id='search-specific'>
                                 <option value="">any</option>
                                 <option value="movie:">Movie</option>
@@ -62,17 +63,9 @@
                 </div>
             </form>
         </section>
-        <section class="results-one hidden">
-        </section>
-        <section class="results-two hidden">
-        </section>
-        <section class="results-three hidden">
-        </section>
-        <section class="results-four hidden">
-        </section>
-        <section class="results-five hidden">
-        </section>
-        <section class="results-six hidden">
+        <section class="all-results hidden">
+            <div class="results"></div>
+            <div class="previous hidden"><button class="submit" id="goBackOne">Go back a Degree</button></div>
         </section>
         <section class="result-end hidden">
             <div class="final-results-all"></div>
@@ -83,15 +76,9 @@
 
 
     <footer>
-        This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a>.
+        This site uses the <a href="https://tastedive.com/read/api">Tastedive API and the <a href="https://www.mediawiki.org/wiki/API:Main_page">Wikimedia API</a>.
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
-    <script src="js/index2.js"></script>
-    <script src="js/index3.js"></script>
-    <script src="js/index4.js"></script>
-    <script src="js/index5.js"></script>
-    <script src="js/index6.js"></script>
-    <script src="js/index7.js"></script>
 </body>
 </html>

@@ -119,6 +119,10 @@ form{
     overflow: auto;
   }
 
+img{
+  width:100px;
+}
+
   .after-hidden{
     display: none;
   }
