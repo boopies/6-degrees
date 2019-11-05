@@ -8,19 +8,30 @@
     <meta name="description" content="A website to find new things that you might like">
     <meta name="keywords" content="search, similar, familiar, 6-degrees">
     <meta name="author" content="Mulia Teguh Nguyen">
+    <link type="text/css" rel="stylesheet" href="normalize.css">
     <link type="text/css" rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header><h1>Welcome to 6 degrees!</h1></header>
-    <main>
+<body>  
+    <header>
+        <div class="title">
+            <section class="welcomebackground bg-1"><h1 class="welcome">Welcome to</h1></section>
+            <section class="welcomebackground bg-2"><h1 class="titledegree ">6 degrees!</h1></section>
+        </div>
+        <div class="site-logo"><svg id="logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 681.63 831.29"><defs><style>#logo{fill:#eff1f1;}</style></defs><title>Untitled-1</title><path class="cls-1" d="M817.94,919.07a217,217,0,0,0,251.53-353.8L817.94,919.07Zm-11-7.83a431.56,431.56,0,1,1,500.12-703.47L806.93,911.24Zm463.12-683.8-7-5L1042.17,533.05,978.56,156.53,970,158l64.21,380L719.49,314.26l-5,7.05,312.68,222.3L650.64,607.22l1.44,8.53,376.52-63.61L806.3,864.82l7.06,5,456.69-642.39ZM1006.5,710l51.79-72.85a152,152,0,1,1-176.17,247.8l51.8-72.85A67.57,67.57,0,0,0,1006.5,710Z" transform="translate(-625.42 -127.94)"/></svg>
+        </div>
+    </header>
+    <main> 
         <section class="introduction">
             <div class="intro">Have you ever wondered what artists, books, music, podcasts, movies, or games are similar to the ones you love?
-            6 degrees is can help you find something that is similar to what you like. And if you like what you read, you can extend that search further.
+            6 degrees can help you find something similar to what you like. If you like what you read, you can extend that search further.
             Who knows? Maybe you will discover something that you have never heard of before that takes your fancy. All within 6 Degrees of Similarity.</div>
+        </section>
+        <section class="start-button">
             <button type="submit" id="start-here">Start the search here</button>
         </section>
     </main>
-    <footer>This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a>.</footer>
+    <footer>This site uses the <a href="https://tastedive.com/read/api">Tastedive API</a> and <a href="https://www.mediawiki.org/wiki/API:Main_page">Wikimedia API</a>.</footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="js/start.js"></script>
 </body>

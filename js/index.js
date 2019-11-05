@@ -15,6 +15,9 @@ let finalPath = [];
 //array of the first search result
 let firstSearch = [];
 
+
+let slideIndex = 1;
+
 //Fetch JSON from API for the first restult
 function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResults){
     fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${limitSearch}${inputFirstItem}${limitResults}&limit=${returnResults}`)
@@ -50,39 +53,42 @@ if (responseJson.Similar.Results.length == 0){
 }
 }
 
+//save the search Items
 function displayResults(savedSearchArray) {
     let p = searchNumber;
-    $('.results').append(`
-    <h2>Degree ${p+1} of Similarity</h2>
-    <div class="search-results"> </div>`);
+    $('.degree-of').append(`
+    <h2>Degree ${p+1} of Similarity</h2>`);
     for (let i = 0; i < savedSearchArray[p].length; i++){
         let searchTerm = savedSearchArray[p][i].Name;
-        $(`.search-results`).append(`<div class="results-box${i+1}"><div id='img${i}'></div><p>${i+1}</p>
-    <p>${savedSearchArray[p][i].Name}</p>
-    <p>${savedSearchArray[p][i].Type}</p>
-    <div class="after${p}">
-        <button type="submit" class="after" value="${savedSearchArray[p][i].Name}" id="${p}response${[i]}"> 
-        Search with this</button>
-        <a class="button hidden-after" href="#${p}popups${[i+1]}">Read a bit</a>
-    </div>
-    <div id="${p}popups${i+1}" class="overlay">
-	<div class="popup-result ${i+1}">
-		<h2>${savedSearchArray[p][i].Name}</h2>
-		<a class="close" href="#">&times;</a>
-        <div class="content">
-         ${savedSearchArray[p][i].wTeaser}
-         <a href='${savedSearchArray[p][i].wUrl}' target="blank">Read More Here</a>
-		            </div>
-	            </div>
+        $(`.slideshow-container`).append(`
+        <div class="mySlides fade">
+        <div class="img-and-title">
+        <div id='img${i}'></div>
+        <div class='the-titles'>
+        <div class="after${p}">
+            <button type="submit" class="after" value="${savedSearchArray[p][i].Name}" id="${p}response${[i]}"> 
+            Search with this</button>
             </div>
-        </div>`);
+        </div>
+        </div>
+        <div class="Information ${i+1}">
+            <p>${i+1}</p>
+            <h2>${savedSearchArray[p][i].Name}</h2>
+            <h3>${savedSearchArray[p][i].Type}</h3>
+            <div class="content">
+             ${savedSearchArray[p][i].wTeaser}
+             <a href='${savedSearchArray[p][i].wUrl}' target="blank">Read More Here</a>
+                        </div>
+                    </div>
+        </div>`
+         );
         $.ajax({
                 url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${searchTerm}&gpslimit=1`,
                 method: "GET",
                 dataType: "jsonp",
                 success: function(newData) {
                 if (newData.query.pages[0].hasOwnProperty("thumbnail") === true){
-                    $(`#img${i}`).append(`<img src='${newData.query.pages[0].thumbnail.source}' class='thumbnail'>`)
+                    $(`#img${i}`).append(`<img src='${newData.query.pages[0].thumbnail.source}' class='thumbnail-got'>`)
                 } else{
                 $(`#img${i}`).append(`<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png' class='nothumbnail'>`)
                   }
@@ -92,9 +98,29 @@ function displayResults(savedSearchArray) {
             }
         })
         };
+    addPrevNext();
+    addDotNav(savedSearchArray);
+    showSlides(slideIndex);
+    plusSlides(slideIndex);
     $('.all-results').removeClass('hidden');
     showPreviousResults();
     nextOrEnd(savedSearchArray);
+    currentSlide(slideIndex);
+}
+
+//appends the next and previous button
+function addPrevNext(){
+    $('.slideshow-container').append(`
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>`)
+}
+
+//Add in a dot Navigation
+function addDotNav(savedSearchArray){
+    let p = searchNumber;
+    for (let i = 0; i < savedSearchArray[p].length; i++){
+        $('.dot-slider').append(`<span class="dot" onclick="currentSlide(${i+1})">${i+1}</span>`)
+    }
 }
 
 //Show the Previous search Button
@@ -116,6 +142,7 @@ function watchForm() {
       const maxResults = $('#js-max-results').val();
       returnResults = maxResults;
       limitResults = alimitResults;
+      $('.about').addClass('hidden')
       $('#all-buttons').addClass('hidden');
       $('.similar-button-hide').addClass('hidden');
       firstSearch = $('#js-search-term').val();
@@ -151,7 +178,9 @@ function watchForm2(savedSearchArray){
             const newSearch = $(`#${arrayOne[i]}`).val();
             searchNumber++;
             hideSearch();
-            $('.results').empty();
+            $('.degree-of').empty();
+            $('.slideshow-container').empty();
+            $('.dot-slider').empty();            
             getSimilarItems2(newSearch, limitResults, returnResults);
         }})}
     }
@@ -270,7 +299,9 @@ function goBackOne(){
         savedSearchArray.pop();
         finalPath.pop();
         searchNumber --;
-        $('.results').empty();
+        $('.degree-of').empty();
+        $('.slideshow-container').empty();
+        $('.dot-slider').empty();  
         displayResults(savedSearchArray);
     }
     );
@@ -290,6 +321,30 @@ $('#gotoStart').click(event => {
   event.preventDefault();
   window.location='index.html';
 });
+}
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName('mySlides');
+  let dots = document.getElementsByClassName('dot');
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';  
+  };
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace('active', '');
+  };
+  slides[slideIndex-1].style.display = 'flex';  
+  dots[slideIndex-1].style.display += 'active';
 }
 
 

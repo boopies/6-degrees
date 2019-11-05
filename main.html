@@ -9,32 +9,34 @@
     <meta name="keywords" content="search, similar, familiar, 6-degrees">
     <meta name="author" content="Mulia Teguh Nguyen">
     <link type="text/css" rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Pattaya&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navigation">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="main.html">Reset</a></li>
+            <li class="home-img"><a href="index.html"><img class="home-thumb" src="images/home.svg" alt="home"></a></li>
+            <li class="reset-img"><a href="main.html"><img class="reset-thumb" src="images/reset.svg" alt="reset"></a></li>
         </ul>
+        <div class="site-logo"><img id="SiteLogo" src="images/6deg logo.svg" alt="6 Degrees Logo"></div>
     </nav>
     <header><h1>6 Degrees</h1></header>
     <main>
         <section class="submit-form">
-            <div class="about"><p>Insert the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love. We'll find something similar for you.<br />
+            <div class="about"><p>Input the name of the Musician, Movie, TV Show, Book, Author, Game or Podcast you love. We'll find something similar for you.<br />
                 please use more search options if you need to refine your search or limit your results. 
                 </p></div>
             <form id="search-form">
-                <label for="search-term">Input Search:</label>
                 <div class="search-items-input">
-                <input class="search" input="text" id="js-search-term" required>
-                <button type="submit" class="similar-button-hide">Search</button>
+                <input class="search" id="js-search-term" input="text" autocomplet="off" required>
+                <label for="search-term" class="label-name"><span class="input-search">Input Search</span></label>
             </div>
+            <div class="search-submit"><button type="submit" class="similar-button-hide">Search</button></div>
                 <div id="all-buttons">
                     <button type="submit" class="limit-search">Search Options</button>
                     <div id='search-sepecific'>
-                        <label for="max-results">Results to return(min=3, Max=20) You cannot change this unless you reset the search.</label>
+                        <label class="max-results">Results to return<span class="tooltiptext">Min=3, Max=20 <br />You cannot change this unless you reset the search.</span></label>
                         <input type="number" name="max-results" id="js-max-results" value="6" min="3" max="20">
-                        <div > <label>More than one type with the same name? Which Category does it belong to? If not don't use this option.</label>
+                        <div > <label class="type-search">More than one search with the same name? Use this option.<span class="tooltiptext"> Use this option if your search is available in more than one category. eg: - Harry Potter and the Order of The Pheonix book and movie</span></label>
                             <select id='search-specific'>
                                 <option value="">any</option>
                                 <option value="movie:">Movie</option>
@@ -46,8 +48,8 @@
                                 <option value="podcast:">Podcast</option>
                             </select>
                         </div>
-                        <div id='result-specific'> <lablel>Don't like mixed results? Get a specific type of results only. 
-                            For best results choose a category your input belongs to.</lablel>
+                        <div id='result-specific'> <label class="type-specific">Don't like mixed results? Get a specific type of results only. 
+                            <span class="tooltiptext">For best results choose a category your input belongs to.</span></label>
                             <select id='specific-result'>
                                 <option value="">All Categories</option>
                                 <option value="&type=movies">Movies</option>
@@ -64,7 +66,14 @@
             </form>
         </section>
         <section class="all-results hidden">
-            <div class="results"></div>
+            <div class="results">
+                <div class="degree-of"></div>
+                <div class="slideshow-container"></div>
+                <br />
+                <div class="dot-slider">
+
+                </div>
+            </div>
             <div class="previous hidden"><button class="submit" id="goBackOne">Go back a Degree</button></div>
         </section>
         <section class="result-end hidden">
@@ -79,6 +88,7 @@
         This site uses the <a href="https://tastedive.com/read/api">Tastedive API and the <a href="https://www.mediawiki.org/wiki/API:Main_page">Wikimedia API</a>.
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src=""  ></script>
     <script src="js/index.js"></script>
 </body>
 </html>
