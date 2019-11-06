@@ -24,7 +24,7 @@ main{
 }
 
 h1 {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Pattaya', sans-serif;
     text-align: center;
     color: black;
     margin:0;
@@ -72,15 +72,19 @@ main{
     margin-top:20px;
     margin-bottom: 15px;
     padding: 10px;
-    cursor: pointer;
     border-radius: 10px;
     color: white;
-    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-    box-shadow: 5px 10px 18px #888888;
+    font-size: bold;
+    background-image: radial-gradient( circle farthest-corner at -8.9% 51.2%,  rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66% );
+    transition: 1.0s ease;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
 }
 
 #start-here:hover{
-    background-image: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
+    background-image: radial-gradient( circle farthest-corner at -8.9% 51.2%,  rgb(255, 119, 194, 1) 0%, rgba(255, 119, 194, 1) 15.9%, rgb(250, 199, 233, 1) 15.9%, rgba(250, 199, 233, 1) 24.4%, rgb(255, 255, 255) 24.5%, rgb(255, 255, 255) 66% );
+    color: rgb(65, 65, 65);
 }
 
 footer{
@@ -95,7 +99,7 @@ header{
 }
 
 main{
-    height: 450px;
+    height: 600px;
 }
 
 .welcome{
@@ -120,7 +124,7 @@ main{
     }
 
     main{
-        height: 400px;
+        height: 550px;
     }
 
     .welcome{
