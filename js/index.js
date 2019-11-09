@@ -127,7 +127,6 @@ function displayResults(savedSearchArray) {
                 console.log("second call unsuccessful");
             }
         })
-        break;
         };
     addPrevNext();
     addDotNav(savedSearchArray);
@@ -197,7 +196,6 @@ function nextOrEnd(savedSearchArray){
 
 //Selects the new Search Item, Saves the New Search Item to be used later
 function watchForm2(savedSearchArray){
-    console.log('Ready to Selected');
     slideIndex = 0
     let p = searchNumber;
     let newSearch;
@@ -206,6 +204,7 @@ function watchForm2(savedSearchArray){
      for (let i=0; i < arrayOne.length; i++){
     document.body.addEventListener( 'click', function(event){
         if(event.srcElement.id == `${arrayOne[i]}`) {
+            console.log('this is searched')
             let saveThis = savedSearchArray[p][i];
             saveChoice(saveThis);
             newSearch = $(`#${arrayOne[i]}`).val();
@@ -215,7 +214,7 @@ function watchForm2(savedSearchArray){
             $('.degree-of').empty();
             $('.slideshow-container').empty();
             $('.dot-slider').empty();            
-            getSimilarItems2(newSearch, limitResults, returnResults);
+            getSimilarItems2(newSearch, limitResults, returnResults); 
         }})}
     }
 
@@ -366,8 +365,10 @@ function goBackOne(){
         let i = savedSearchArray.length;
         while (i--) {
             if (i !== searchNumberIndex){
-                savedSearchArray.pop();
-                finalPath.pop();
+                savedSearchArray.splice(-1, 1);
+                finalPath.splice(-1, 1);
+                console.log(savedSearchArray);
+                console.log(finalPath);
                 searchNumberIndex--;
                 searchNumber--;
                 break;
@@ -382,7 +383,7 @@ function goBackOne(){
     }
     );
 }
-     
+
 //resets everything from the search and start again from the search page
 function watchReset() {
 $('#reset-button').click(event => {
