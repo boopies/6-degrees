@@ -30,6 +30,7 @@ function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResult
 //Fetch JSON from API for subsequent
 function getSimilarItems2(newSearch, limitResults, returnResults){
     fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
+    console.log(`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
     .then(response => response.json())
     .then(responseJson => checkResults(responseJson))
     .catch(error => alert('We are having some issues.'));
@@ -60,7 +61,7 @@ function displayResults(savedSearchArray) {
     $('.degree-of').append(`
     <h2 class="deg-title">Degree ${p+1} of Similarity</h2>`);
     for (let i = 0; i < savedSearchArray[p].length; i++){
-        let searchTerm = savedSearchArray[p][i].Name;
+        let searchTerm = savedSearchArray[p][i].Name;
         $(`.slideshow-container`).append(`
         <div class="mySlides fade">
         <div class="img-and-title">
@@ -113,16 +114,16 @@ function displayResults(savedSearchArray) {
         </div>`
          );
         $.ajax({
-                url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${searchTerm}&gpslimit=1`,
-                method: "GET",
-                dataType: "jsonp",
-                success: function(newData) {
+                url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${searchTerm}&gpslimit=1`,
+                method: "GET",
+                dataType: "jsonp",
+                success: function(newData) {
                 if (newData.query.pages[0].hasOwnProperty("thumbnail") === true){
                     $(`#img${i}`).append(`<img src='${newData.query.pages[0].thumbnail.source}' class='thumbnail-got'>`)
                 } else{
                 $(`#img${i}`).append(`<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png' class='nothumbnail'>`)
-                  }
-              },
+                  }
+              },
             error: function() {
                 console.log("second call unsuccessful");
             }
@@ -336,16 +337,16 @@ function displayFinal6(){
                     `);
         let searchTerm = finalPath[i].Name;
         $.ajax({
-                url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${searchTerm}&gpslimit=1`,
-                method: "GET",
-                dataType: "jsonp",
-                success: function(newData) {
+                url: `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch=${searchTerm}&gpslimit=1`,
+                method: "GET",
+                dataType: "jsonp",
+                success: function(newData) {
                 if (newData.query.pages[0].hasOwnProperty("thumbnail") === true){
                     $(`#imgfinal${i}`).append(`<img src='${newData.query.pages[0].thumbnail.source}' class='thumbnail-have'>`)
                 } else{
                 $(`#imgfinal${i}`).append(`<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png' class='havenothumbnail'>`)
-                  }
-              },
+                  }
+              },
             error: function() {
                 console.log("second call unsuccessful");
             }

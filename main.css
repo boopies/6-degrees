@@ -751,6 +751,14 @@ nav{
   background-color: rgba(92, 92, 92, 0.8);
 }
 
+.slideshow-container-end{
+  display:grid;
+  grid-template-columns: 300px 50px 300px 50px;
+  grid-template-rows: repeat(3, minmax(300px, 350px));
+  justify-items: center;
+  grid-row-gap: 10px;}
+
+
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
@@ -877,4 +885,15 @@ nav{
   background-color: rgba(0,0,0,0.8);
 }
 
+.slideshow-container-end{
+  display:grid;
+  grid-template-columns: 350px;
+  grid-template-rows: repeat(6, 350px 50px);
+  justify-items: center;
+  grid-row-gap: 5px;
+  grid-column-gap: 5px;}
+
+#Layer_2{
+  transform: rotate(90deg)
+}
 }
