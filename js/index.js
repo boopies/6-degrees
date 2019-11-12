@@ -29,8 +29,8 @@ function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResult
 
 //Fetch JSON from API for subsequent
 function getSimilarItems2(newSearch, limitResults, returnResults){
+    console.log(`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`);
     fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
-    console.log(`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
     .then(response => response.json())
     .then(responseJson => checkResults(responseJson))
     .catch(error => alert('We are having some issues.'));
