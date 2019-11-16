@@ -224,7 +224,6 @@ function watchForm() {
 function watchForm2(savedSearchArray){
     slideIndex = 0
     let p = searchNumber;
-    let newSearch;
     let arrayOne = $(`.results .after${p} button`).map(function(){return this.id;}).get();
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arrayOne.length; i++){
@@ -232,10 +231,10 @@ function watchForm2(savedSearchArray){
             event.preventDefault();
         const pressID = event.target.id;
         if(pressID == `${arrayOne[i]}`) {
-            console.log(pressID + ' is searched')
+            console.log(pressID + ' is searched');
             let saveThis = savedSearchArray[p][i];
             saveChoice(saveThis);
-            newSearch = pressID;
+            let newSearch = pressID;
             searchNumber++;
             hideSearch();
             $('.degree-of').empty();
@@ -260,21 +259,19 @@ function hideSearch(){
 
  //Final Selection to moved to Display Final 6 to show final results       
 function watchFormFinal(savedSearchArray){
-    let p = searchNumber;
-    slideIndex = 0
         //creates an array from the results buttons
-    let arraySix = $(`.results .after${p} button`).map(function(){return this.id;}).get();            
-        for (let i=0; i < arraySix.length; i++){
+    let arrayFinal = $(`.results .after${p} button`).map(function(){return this.id;}).get();            
+        for (let i=0; i < arrayFinal.length; i++){
             $(`.slideshow-container`).on(`click`, `.after-search`, event =>{
                 event.preventDefault();
                 const pressID = event.target.id;
-                if(pressID == `${arrayOne[i]}`) {
-                    let saveThis = savedSearchArray[p][i];
-                    console.log(pressID + ' is searched')
-                    saveChoice(saveThis);
-                    displayFinal6();
-                    $('.all-results').removeClass('hidden');
-                    $('.results').addClass('hidden');
+                if(pressID == `${arrayFinal[i]}`) {
+                let saveThis = savedSearchArray[p][i];
+                console.log(pressID + ' is searched');
+                saveChoice(saveThis);
+                displayFinal6();
+                $('.all-results').removeClass('hidden');
+                $('.results').addClass('hidden');
         };})}
     }
 
@@ -289,12 +286,6 @@ function revealLimitSearch(){
               x.style.display = "none";
             }
           });
-}
-
-//Hides Search Button to stop 
-function hideSearch(){
-    let p = searchNumber;
-    $(`.after${p}`).addClass('after-hidden')
 }
 
 //Sets the firstSearch array as first search Info
