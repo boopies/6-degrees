@@ -5,9 +5,10 @@ let returnResults = 6;
 
 //variable for which search number it is
 let searchNumber = 0;
+let searchNumberIndex = 1;
 
 //Searched Saved for Final Results
-let savedSearchArray = [];
+const savedSearchArray = [];
 
 //array of saved search results
 let finalPath = [];
@@ -17,6 +18,9 @@ let firstSearch = [];
 
 // Slide Index Number
 let slideIndex = 0;
+
+//Saves all items that were input
+let saveSearchInput=[];
 
 //Fetch JSON from API for the first restult
 function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResults){
@@ -56,31 +60,32 @@ if (responseJson.Similar.Results.length == 0){
 //save the search Items
 function displayResults(savedSearchArray) {
     console.log(savedSearchArray);
-    p = searchNumber;
+    let p = searchNumber;
+    let k = 0;
     $('.degree-of').append(`
     <h2 class="deg-title">Degree ${p+1} of Similarity</h2>`);
-    for (let i = 0; i < savedSearchArray[p].length; i++){
-        let searchTerm = savedSearchArray[p][i].Name;
+    for (let i = 0; i < savedSearchArray[k].length; i++){
+        let searchTerm = savedSearchArray[k][i].Name;
         $(`.slideshow-container`).append(`
         <div class="mySlides fade">
         <div class="img-and-title">
         <div id='img${i}' class="img-size"></div>
         <div class='the-titles'>
         <div class="after${p}">
-            <button type="submit" class="after-search" value="${savedSearchArray[p][i].Name}" id="${savedSearchArray[p][i].Name}"> 
+            <button type="submit" class="after-search" value="${savedSearchArray[k][i].Name}" id="${savedSearchArray[k][i].Name}"> 
             Search with this</button>
             </div>
         </div>
         </div>
         <div class="Information ${i+1}">
             <p class="resultnumber">${i+1}</p>
-            <h2>${savedSearchArray[p][i].Name}</h2>
-            <h3>${savedSearchArray[p][i].Type}</h3>
+            <h2>${savedSearchArray[k][i].Name}</h2>
+            <h3>${savedSearchArray[k][i].Type}</h3>
             <div class="content">
-             ${savedSearchArray[p][i].wTeaser}
+             ${savedSearchArray[k][i].wTeaser}
              <br />
              <br />
-             <a class="readmore-btn" href='${savedSearchArray[p][i].wUrl}' target="blank">
+             <a class="readmore-btn" href='${savedSearchArray[k][i].wUrl}' target="blank">
              <svg class="readmore" width="356" height="81" viewBox="0 0 356 81" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="356" height="81" rx="35" fill="#696969"/>
                 <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="356" height="81">
@@ -138,6 +143,15 @@ function displayResults(savedSearchArray) {
     currentSlide(slideIndex);
 }
 
+//Show the Previous search Button
+function showPreviousResults(){
+    if (searchNumber >= 1){
+        $('.previous').removeClass('hidden');
+    } else if (searchNumber >= 0){
+        $('.previous').addClass('hidden');    
+    }
+}
+
 //appends the next and previous button
 function addPrevNext(){
     $('.slideshow-container').append(`
@@ -147,8 +161,8 @@ function addPrevNext(){
 
 //Add in a dot Navigation
 function addDotNav(savedSearchArray){
-    let p = searchNumber;
-    for (let i = 0; i < savedSearchArray[p].length; i++){
+    let k=0;
+    for (let i = 0; i < savedSearchArray[k].length; i++){
         $('.dot-slider').append(`<span class="dot" onclick="currentSlide(${i+1})">${i+1}</span>`)
     }
 }
@@ -210,6 +224,7 @@ function watchForm() {
       const limitSearch = $('#search-specific option:selected').val();
       const alimitResults = $('#specific-result option:selected').val();
       const maxResults = $('#js-max-results').val();
+      saveSearchInput.push(inputFirstItem);
       returnResults = maxResults;
       limitResults = alimitResults;
       $('.about').addClass('hidden')
@@ -224,18 +239,22 @@ function watchForm() {
 function watchForm2(savedSearchArray){
     slideIndex = 0
     let p = searchNumber;
+    let k = 0;
     let arrayOne = $(`.results .after${p} button`).map(function(){return this.id;}).get();
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arrayOne.length; i++){
-        $(`.slideshow-container`).on(`click`, `.after-search`, event =>{
+        $(`.slideshow-container`).one(`click`, `.after-search`, event =>{
             event.preventDefault();
         const pressID = event.target.id;
         if(pressID == `${arrayOne[i]}`) {
             console.log(pressID + ' is searched');
-            let saveThis = savedSearchArray[p][i];
+            let saveThis = savedSearchArray[k][i];
             saveChoice(saveThis);
             let newSearch = pressID;
+            saveSearchInput.push(newSearch);
             searchNumber++;
+            searchNumberIndex++;
+            savedSearchArray.pop();
             hideSearch();
             $('.degree-of').empty();
             $('.slideshow-container').empty();    
@@ -260,13 +279,15 @@ function hideSearch(){
  //Final Selection to moved to Display Final 6 to show final results       
 function watchFormFinal(savedSearchArray){
         //creates an array from the results buttons
+        let p = searchNumber;
+        let k = 0;
     let arrayFinal = $(`.results .after${p} button`).map(function(){return this.id;}).get();            
         for (let i=0; i < arrayFinal.length; i++){
-            $(`.slideshow-container`).on(`click`, `.after-search`, event =>{
+            $(`.slideshow-container`).one(`click`, `.after-search`, event =>{
                 event.preventDefault();
                 const pressID = event.target.id;
                 if(pressID == `${arrayFinal[i]}`) {
-                let saveThis = savedSearchArray[p][i];
+                let saveThis = savedSearchArray[k][i];
                 console.log(pressID + ' is searched');
                 saveChoice(saveThis);
                 displayFinal6();
@@ -399,6 +420,35 @@ $('#reset-button').click(event => {
 });
 }
 
+//goes back a search result
+function goBackOne(){
+    $('#goBackOne').click(event=> {
+        event.preventDefault();
+        let p = searchNumber;
+        console.log(saveSearchInput[p] + " is removed")
+        let i = searchNumber;
+         while (i--) {
+            if (i !== searchNumberIndex){
+                savedSearchArray.splice(-1, 1);
+                finalPath.pop();
+                saveSearchInput.pop();
+                searchNumber--;
+                searchNumberIndex--;
+                break;
+            }
+        };
+        let z = searchNumber;
+        $('.degree-of').empty();
+        $('.slideshow-container').empty();
+        $('.dot-slider').empty();
+        let newSearch = saveSearchInput[z];
+        console.log(newSearch + " is searched")
+        getSimilarItems2(newSearch, limitResults, returnResults); 
+    }
+    );
+}
+
+
 //returns users to the landing page
 function watchStart() {
 $('#gotoStart').click(event => {
@@ -411,4 +461,5 @@ $(function(){
     console.log('App loaded! Waiting for submit!');
     watchForm();
     revealLimitSearch();
+    goBackOne();
 });
