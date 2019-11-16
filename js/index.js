@@ -5,7 +5,6 @@ let returnResults = 6;
 
 //variable for which search number it is
 let searchNumber = 0;
-let searchNumberIndex = 1;
 
 //Searched Saved for Final Results
 let savedSearchArray = [];
@@ -27,18 +26,18 @@ function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResult
     .catch(error => alert('We are having some issues.'));
 }
 
-//Fetch JSON from API for subsequent
-function getSimilarItems2(newSearch, limitResults, returnResults){
-    console.log(`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`);
-    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
-    .then(response => response.json())
-    .then(responseJson => checkResults(responseJson))
-    .catch(error => alert('We are having some issues.'));
-}
-
 //Display search results on the DOM. Saves the original Input to be used later.
 function checkResults(responseJson){
 if (responseJson.Similar.Results.length == 0){
+    $('.results').append(`
+    <h2 class="problem">Oh No!</h2>
+    <div class="search-results">
+    <p>There no results for this. Please check your spelling, refine your search, or try a new search.</p> 
+    <button class="submit" id="reset-button">Search Again</button></div>`);
+    $('.submit-form').addClass('hidden')
+    $('.all-results').removeClass('hidden');
+    watchReset();
+} else if (responseJson.Similar.Results.length == 2){
     $('.results').append(`
     <h2 class="problem">Oh No!</h2>
     <div class="search-results">
@@ -68,7 +67,7 @@ function displayResults(savedSearchArray) {
         <div id='img${i}' class="img-size"></div>
         <div class='the-titles'>
         <div class="after${p}">
-            <button type="submit" class="after-search" value="${savedSearchArray[p][i].Name}" id="${p}response${[i]}"> 
+            <button type="submit" class="after-search" value="${savedSearchArray[p][i].Name}" id="${savedSearchArray[p][i].Name}"> 
             Search with this</button>
             </div>
         </div>
@@ -163,6 +162,46 @@ function showPreviousResults(){
     }
 }
 
+//adds in the function to move between search results
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+//keeps track of the slides.
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+//displays the slides
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName('mySlides');
+    let dots = document.getElementsByClassName('dot');
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';  
+    };
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(' active', '');
+    };
+    slides[slideIndex-1].style.display = 'flex';  
+    dots[slideIndex-1].className += ' active';
+  }
+  
+//Checks if the search if 5 searches have been made to move the search to the final end pages.
+function nextOrEnd(savedSearchArray){
+    if(searchNumber <= 4){
+        $(function(){
+            watchForm2(savedSearchArray);
+        });
+    } else {
+        $(function(){
+            watchFormFinal(savedSearchArray);
+        });
+    }
+}
+
 //Form to input selection
 function watchForm() {
     $('form').submit(event => {
@@ -181,20 +220,6 @@ function watchForm() {
     });
 }
 
-//Checks if the search if 5 searches have been made to move the search to the final end pages.
-function nextOrEnd(savedSearchArray){
-    if(searchNumber <= 4){
-        $(function(){
-            watchForm2(savedSearchArray);
-        });
-    } else {
-        $(function(){
-            watchFormFinal(savedSearchArray);
-        });
-    }
-}
-
-
 //Selects the new Search Item, Saves the New Search Item to be used later
 function watchForm2(savedSearchArray){
     slideIndex = 0
@@ -203,21 +228,35 @@ function watchForm2(savedSearchArray){
     let arrayOne = $(`.results .after${p} button`).map(function(){return this.id;}).get();
     //loops to the buttons to add an event listener to start a new search
      for (let i=0; i < arrayOne.length; i++){
-    document.body.addEventListener( 'click', function(event){
-        if(event.srcElement.id == `${arrayOne[i]}`) {
-            console.log('this is searched')
+        $(`.slideshow-container`).on(`click`, `.after-search`, event =>{
+            event.preventDefault();
+        const pressID = event.target.id;
+        if(pressID == `${arrayOne[i]}`) {
+            console.log(pressID + ' is searched')
             let saveThis = savedSearchArray[p][i];
             saveChoice(saveThis);
-            newSearch = $(`#${arrayOne[i]}`).val();
+            newSearch = pressID;
             searchNumber++;
-            searchNumberIndex++;
             hideSearch();
             $('.degree-of').empty();
-            $('.slideshow-container').empty();
-            $('.dot-slider').empty();            
+            $('.slideshow-container').empty();    
+            $('.dot-slider').empty();              
             getSimilarItems2(newSearch, limitResults, returnResults); 
-        }})}
+        };})}
     }
+
+//Fetch JSON from API for subsequent searches
+function getSimilarItems2(newSearch, limitResults, returnResults){
+    console.log(`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`);
+    fetch (`https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?k=348431-SChoolPr-IA45DQJL&info=1&q=${newSearch}${limitResults}&limit=${returnResults}`)
+    .then(response => response.json())
+    .then(responseJson => checkResults(responseJson))
+    .catch(error => alert('We are having some issues.'));
+}
+
+function hideSearch(){
+    $('.after-search').addClass('hidden');
+}
 
  //Final Selection to moved to Display Final 6 to show final results       
 function watchFormFinal(savedSearchArray){
@@ -226,14 +265,17 @@ function watchFormFinal(savedSearchArray){
         //creates an array from the results buttons
     let arraySix = $(`.results .after${p} button`).map(function(){return this.id;}).get();            
         for (let i=0; i < arraySix.length; i++){
-            document.body.addEventListener( 'click', function(event){
-                if(event.srcElement.id == `${arraySix[i]}`) {
+            $(`.slideshow-container`).on(`click`, `.after-search`, event =>{
+                event.preventDefault();
+                const pressID = event.target.id;
+                if(pressID == `${arrayOne[i]}`) {
                     let saveThis = savedSearchArray[p][i];
+                    console.log(pressID + ' is searched')
                     saveChoice(saveThis);
                     displayFinal6();
                     $('.all-results').removeClass('hidden');
                     $('.results').addClass('hidden');
-        } })}
+        };})}
     }
 
 //reveals the extra search items
@@ -265,7 +307,6 @@ function saveInput(responseJson){
 //push familiar search info to finalPath array
 function saveChoice(saveThis){
     finalPath.push(saveThis);
-    console.log(finalPath);
 }
 
 //Display the 6 choices you have selected. gives you more information about it. 
@@ -359,32 +400,6 @@ function displayFinal6(){
         watchStart();  
 }
 
-//goes back a search result
-function goBackOne(){
-    $('#goBackOne').click(event=> {
-        event.preventDefault();
-        let i = savedSearchArray.length;
-        while (i--) {
-            if (i !== searchNumberIndex){
-                savedSearchArray.splice(-1, 1);
-                finalPath.splice(-1, 1);
-                console.log(savedSearchArray);
-                console.log(finalPath);
-                searchNumberIndex--;
-                searchNumber--;
-                break;
-            }
-        };
-        console.log(savedSearchArray);
-        console.log(finalPath);
-        $('.degree-of').empty();
-        $('.slideshow-container').empty();
-        $('.dot-slider').empty();  
-        displayResults(savedSearchArray);
-    }
-    );
-}
-
 //resets everything from the search and start again from the search page
 function watchReset() {
 $('#reset-button').click(event => {
@@ -401,33 +416,8 @@ $('#gotoStart').click(event => {
 });
 }
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName('mySlides');
-  let dots = document.getElementsByClassName('dot');
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';  
-  };
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(' active', '');
-  };
-  slides[slideIndex-1].style.display = 'flex';  
-  dots[slideIndex-1].className += ' active';
-}
-
 $(function(){
     console.log('App loaded! Waiting for submit!');
     watchForm();
     revealLimitSearch();
-    goBackOne();
 });
