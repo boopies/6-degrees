@@ -5,17 +5,17 @@ https://boopies.github.io/6-degrees/
 
 ScreenShots:
 Start Page:
-https://i.ibb.co/dp5Bx4y/6-dregrees-01.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees01.png
 Search Page:
-https://i.ibb.co/44ygFSk/6-dregrees-02.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees02.png
 Search Page with extended search:
-https://i.ibb.co/ws3DsQK/6-dregrees-03.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees03.png
 Search Results Page:
-https://i.ibb.co/QJ9m9yJ/6-dregrees-04.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees04.png
 Search Results Page with go back feature:
-https://i.ibb.co/1Mggm8p/6-dregrees-05.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees05.png
 Final Page:
-https://i.ibb.co/zX4v05z/6-dregrees-06.png
+https://github.com/boopies/6-degrees/blob/master/screenshots/6-dregrees06.png
 
 App Summary:
 6-Degrees is a search app which uses the Tastedive API to help you to find items that are similar to the things that you like. If you have ever wondered what artists, movies, books, authors, games, or podcast were similar to the ones you like, 6 degrees can help you find it. What makes this app interesting is that it allows you to do searches of the results that might interest you up to 6 times. This creating a six degrees of similarity between your initial search and the final search item. 
