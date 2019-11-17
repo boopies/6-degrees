@@ -5,22 +5,32 @@
     font-size: 20px;
 }
 
-body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: sans-serif;
-    background-image: linear-gradient( 109.6deg,  rgba(41,125,182,1) 3.6%, rgba(77,58,151,1) 51%, rgba(103,55,115,1) 92.9% );
+html{
+  width: 100%;
+  min-height: 100%;
+  background-image: linear-gradient( 109.6deg,  rgba(41,125,182,1) 3.6%, rgba(77,58,151,1) 51%, rgba(103,55,115,1) 92.9% );
+  background-size: contain;
 }
 
-.results{
+body {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+main{
+    flex: 1;
+}
+
+.problem-para{
+  color: white;
+  padding: 20px;
+  font-weight: bolder;
+  font-size: 1.5em;
 }
 
 .site-logo{
@@ -56,7 +66,7 @@ nav{
 
 header{
   width: 100%;
-  padding: 50px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -68,6 +78,7 @@ header{
 }
 
 .problem {
+  font-size: 2.5em;
   color:red;
 }
 
@@ -99,7 +110,7 @@ header{
   border-bottom: 1px dotted black;
 }
   
-  .type-search .tooltiptext {
+.type-search .tooltiptext {
     visibility: hidden;
     width: 300px;
     background: linear-gradient(45deg, #CCE0F4 0%, #1E9CD7 48%, #005B97 100%);
@@ -111,29 +122,29 @@ header{
     z-index: 1;
   }
   
-  .type-search:hover .tooltiptext {
-    visibility: visible;}
+.type-search:hover .tooltiptext {
+    visibility: visible;
+}
 
-    .type-specific{
+.type-specific{
       border-bottom: 1px dotted black;
-    }
+}
       
-      .type-specific .tooltiptext {
-        visibility: hidden;
-        width: 300px;
-        background: linear-gradient(45deg, #CCE0F4 0%, #1E9CD7 48%, #005B97 100%);
-        color: #000000;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
+.type-specific .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background: linear-gradient(45deg, #CCE0F4 0%, #1E9CD7 48%, #005B97 100%);
+  color: #000000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
       
-        /* Position the tooltip */
-        position: absolute;
-        z-index: 1;
-      }
-      
-      .type-specific:hover .tooltiptext {
-        visibility: visible;}
+.type-specific:hover .tooltiptext {
+  visibility: visible;
+}
 
 h1{
   font-family: 'Pattaya', sans-serif;
@@ -410,7 +421,7 @@ transition: all 0.3s ease;
 .mySlides{
   display:flex;
   width: 70%;
-  height: 350px;
+  height: 400px;
   padding: 30px;
   box-shadow: 1px 5px 18px #eeeeee;
   border-radius: 20px;
@@ -442,12 +453,12 @@ transition: all 0.3s ease;
 
 
 #goBackOne{
-margin-top: 10px;
+margin-top: 20px;
 }
 
 .Information{
   width: 75%;
-  height: 300px;
+  height: 350px;
   overflow: scroll;
   padding: 10px;
   color: rgb(68, 68, 68);
@@ -567,23 +578,12 @@ a{
   overflow: scroll;
 }
 
-#footer{
-  position: relative;
-  height: 50px;
-  margin-top: -50px;
-  clear:both;
-  color: white;
-  z-index: -1;
-}
-
 .arrow{
   height:100px;
   width: 100px;
 }
 
 .final-results-all{
-  height: 800px;
-  width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -591,21 +591,23 @@ a{
 
 .slideshow-container-end{
   display:grid;
-  grid-template-columns: 300px 50px 300px 50px 300px 50px;
-  grid-auto-columns: minmax(300px, 350px) minmax(50px, 50px);
-  grid-auto-rows: minmax(300px, 350px);
+  grid-template-columns: 320px 50px 320px 50px 320px 50px;
+  grid-template-rows: 350px 350px;
   justify-items: center;
-  grid-row-gap: 20px;
-
 }
 
 .myDegree{
   display: flex;
   flex-direction: column;
   background-color: white;
-  height: 300px;
-  width: 300px;
-  justify-content: center;
+  height: 320px;
+  width: 320px;
+  justify-content: space-evenly;
+}
+
+.finals-links{
+  display: flex;
+  flex-direction: column;
 }
 
 .img-and-title-final{
@@ -649,10 +651,45 @@ align-self: center;
   width: 200px;
 }
 
-.result-end{
-  width: 100vw;
+.final-title{
+  font-size: 1em;
 }
-@media only screen and (max-width: 1220px){
+
+footer {
+  margin-top: 50px;
+}
+
+
+@media only screen and (max-width: 1244px) {
+
+    .img-and-title {
+        justify-content: space-evenly;
+    }
+
+    .img-size {
+        height: 150px;
+        width: 150px;
+    }
+
+    .after-search {
+        width: 150px;
+        height: 50px;
+    }
+
+    .myDegree {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        height: 320px;
+        width: 320px;
+        justify-content: space-evenly;
+    }
+
+}
+
+
+@media only screen and (max-width: 1024px){
+
 #SiteLogo{
   display: none;
 }
@@ -667,30 +704,36 @@ nav{
   background-image:url();
 }
 
-.img-size{
-  height: 200px;
-  width: 200px;
-}
-
 .content{
   font-size: 1em;
 }
 
-  .mySlides{
-    flex-direction:column;
-    width: 90%;
-    height: 500px;
+.slideshow-container{
+  width: 100%;
+}
+
+.mySlides{
+    width: 85%;
+    height: 400px;
     align-items: center;
     padding: 10px;
   }
 
   .img-and-title{
-  width: 100%;
+  width: 25%;
   height: 300px;
   }
 
+.results{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
   .Information{
-    width:100%;
+    width:75%;
     padding: 10px;
   }
 
@@ -721,6 +764,7 @@ nav{
     grid-template-rows: repeat(3, 1fr);
     width:75%;
     justify-items: center;
+    align-items: center;
   }
 
 /* Next & previous buttons */
@@ -756,8 +800,8 @@ nav{
 
 .slideshow-container-end{
   display:grid;
-  grid-template-columns: 300px 50px 300px 50px;
-  grid-template-rows: repeat(3, minmax(300px, 350px));
+  grid-template-columns: 350px 50px 350px 50px;
+  grid-template-rows: repeat(3, minmax(350px, 350px));
   justify-items: center;
   grid-row-gap: 10px;}
 
@@ -767,19 +811,58 @@ nav{
   background-color: rgba(0,0,0,0.8);
 }
 
+
+.popup-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 75%;
+  height: 75%;
+  position: relative;
+  top: 15%;
+  left: 10%;
+  z-index: 99;
+  overflow: auto;
 }
+
+
+.popup-result .content {
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+
+.read-more-final{
+  text-align: center;
+}
+
+.reset-start-button{
+  display:flex;
+  flex-direction: column;
+
+}
+
+.myDegree .final-degrees{
+  font-size: 2em;
+}
+
+}
+
+
 
 @media only screen and (max-width: 768px){
 
-main{
-  flex: 1;
-}
 
 h1{
   font-size: 4em;
 }
 
 h2{
+  padding: 10px;
   font-size: 1.5em;
 }
 
@@ -794,8 +877,16 @@ nav{
 }
 
 .img-size{
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
+}
+
+.Information .resultnumber{
+  font-size: 1em;
+}
+
+.Information h2{
+  font-size: 1.2em;
 }
 
 .content{
@@ -905,44 +996,55 @@ nav{
 .popup-result {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
-  background: #fff;
   border-radius: 5px;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
   position: relative;
-  top: 0%;
-  left: 0%;
+  top: 15%;
+  left: 10%;
   z-index: 99;
   overflow: auto;
 }
 
-.popup-result h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup-result .close {
-  position: absolute;
-  top: 10px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup-result .close:hover {
-  color: #06D85F;
-}
+
 .popup-result .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   text-align: left;
-  width: 100%;
-  max-height: 100%;
 }
+
+
+.read-more-final{
+  text-align: center;
+}
+
+.reset-start-button{
+  display:flex;
+  flex-direction: column;
+  margin-top: -100px;
+}
+
+}
+
+
+@media only screen and (max-width: 572px){
+  .what-searched {
+    font-size: 1em;
+    text-overflow: wrap;
+  }
+
+  .popup-result {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .popup-result .content p{
+    font-size: 0.95em;
+  }
+
 }

@@ -99,7 +99,7 @@ header{
 }
 
 main{
-    height: 600px;
+    height: 525px;
 }
 
 .welcome{
@@ -112,7 +112,7 @@ main{
 
 .introduction{
     padding: 20px;
-    font-size: 1.5em;
+    font-size: 1.3em;
     }
 
 }
@@ -124,7 +124,7 @@ main{
     }
 
     main{
-        height: 550px;
+        height: 610px;
     }
 
     .welcome{
