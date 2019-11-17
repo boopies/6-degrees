@@ -22,7 +22,11 @@ let slideIndex = 0;
 //Saves all items that were input
 let saveSearchInput = [];
 
+//counter to limit use of go to previous. limits it to going back one search, not multiple. 
 let returnCounter = 1;
+
+//counter to determine if to append the search item to the DOM.
+let searchAlready = 0;
 
 //Fetch JSON from API for the first restult
 function getSimilarItems(inputFirstItem, limitResults, limitSearch, returnResults) {
@@ -196,8 +200,7 @@ function showSlides(n) {
     dots[slideIndex - 1].className += ' active';
 }
 
-// Checks if the search if 5 searches have been made to move the search to the
-// final end pages.
+// Checks if the search if 5 searches have been made to move the search to the final end pages.
 function nextOrEnd(savedSearchArray) {
     if (searchNumber <= 4) {
         $(function () {
@@ -267,6 +270,7 @@ function getSimilarItems2(newSearch, limitResults, returnResults) {
         .catch(error => alert('We are having some issues.'));
 }
 
+//hides the search button after selecting next search
 function hideSearch() {
     $('.after-search').addClass('hidden');
 }
@@ -307,6 +311,7 @@ function revealLimitSearch() {
 
 //appends the first search and details to DOM
 function appendSearchItem(firstSearch) {
+    if (searchAlready === 0){
     $('.what-searched').append(
         `<h2>Results similar to <a class="final-title" href="#searchpopupsinput">${firstSearch.Name}</a>
                 </div>are: <div id="searchpopupsinput" class="overlay">
@@ -346,7 +351,9 @@ function appendSearchItem(firstSearch) {
                     </div>
                 </div>
             </div> </h2>`
-    );
+            );
+        searchAlready++;
+    }
 }
 
 //Sets the firstSearch array as first search Info
@@ -410,7 +417,7 @@ function displayFinal6() {
     for (let i = 0; i < finalPath.length; i++) {
         $('.slideshow-container-end').append(`<div class="myDegree my-degree-${i}">
                     <div class="img-and-title-final"><p class="final-degrees">Degree ${i + 1}</p>
-                    <a href="#ending-popups${i}"><div id="imgfinal${i}" class="img-size"></div></a>
+                    <a href="#ending-popups${i}"><div id="imgfinal${i}" class="img-size-final"></div></a>
                     </div>
                     <div class="finals-links">
                     <a href="#ending-popups${i}"><p class="final-name">${finalPath[i].Name}</p></a>
