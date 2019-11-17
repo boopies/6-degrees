@@ -63,7 +63,6 @@ function checkResults(responseJson) {
 
 //save the search Items
 function displayResults(savedSearchArray) {
-    console.log(savedSearchArray);
     let p = searchNumber;
     let k = 0;
     $('.degree-of').append(`<h2 class="deg-title">Degree ${p + 1} of Similarity</h2>`);
@@ -242,7 +241,6 @@ function watchForm2(savedSearchArray) {
             event.preventDefault();
             const pressID = event.target.id;
             if (pressID == `${arrayOne[i]}`) {
-                console.log(pressID + ' is searched');
                 let saveThis = savedSearchArray[k][i];
                 saveChoice(saveThis);
                 let newSearch = pressID;
@@ -287,7 +285,6 @@ function watchFormFinal(savedSearchArray) {
             const pressID = event.target.id;
             if (pressID == `${arrayFinal[i]}`) {
                 let saveThis = savedSearchArray[k][i];
-                console.log(pressID + ' is searched');
                 saveChoice(saveThis);
                 displayFinal6();
                 $('.all-results').addClass('hidden');
@@ -505,7 +502,6 @@ function goBackOne() {
     $('#goBackOne').click(event => {
         event.preventDefault();
         let p = searchNumber;
-        console.log(saveSearchInput[p] + " is removed")
         let i = searchNumber;
         while (i--) {
             if (i !== searchNumberIndex) {
@@ -524,7 +520,6 @@ function goBackOne() {
         $('.slideshow-container').empty();
         $('.dot-slider').empty();
         let newSearch = saveSearchInput[z];
-        console.log(newSearch + " is searched")
         getSimilarItems2(newSearch, limitResults, returnResults);
     });
 }
