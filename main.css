@@ -230,6 +230,14 @@ main {
   text-align: center;
 }
 
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
 .deg-title {
   margin-bottom: 10px;
   color: white;
@@ -529,6 +537,29 @@ main {
   animation-name: fade;
   animation-duration: 1.5s;
 }
+
+.read-button{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  padding-left: 15px;
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  color: white;
+  font-size: bold;
+  background-image: radial-gradient(circle farthest-corner at -8.9% 51.2%, rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66%);
+  transition: 1.0s ease;
+}
+
+.read-button:hover {
+  background-image: radial-gradient(circle farthest-corner at -8.9% 51.2%, rgb(255, 119, 194, 1) 0%, rgba(255, 119, 194, 1) 15.9%, rgb(250, 199, 233, 1) 15.9%, rgba(250, 199, 233, 1) 24.4%, rgb(255, 255, 255) 24.5%, rgb(255, 255, 255) 66%);
+  color: rgb(65, 65, 65);
+  border: 1px solid black;
+}
+
+
 
 @-webkit-keyframes fade {
   from {
