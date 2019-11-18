@@ -30,7 +30,7 @@ Search Results Page with go back feature:
 Final Page:
 ![Final screen](screenshots/6-dregrees06.png)
 Final Page Information Screen:
-![Final Information screen](screenshots/6-dregrees06.png)
+![Final Information screen](screenshots/6-dregrees07.png)
 
 
 Technologies used for 6 degrees:
