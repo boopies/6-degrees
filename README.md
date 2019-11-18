@@ -29,6 +29,8 @@ Search Results Page with go back feature:
 ![Resultsback screen](screenshots/6-dregrees05.png)
 Final Page:
 ![Final screen](screenshots/6-dregrees06.png)
+Final Page Information Screen:
+![Final Information screen](screenshots/6-dregrees06.png)
 
 
 Technologies used for 6 degrees:
